@@ -23,13 +23,13 @@ Ways to thank me:
 2. Twitter: [Follow me](https://twitter.com/intent/follow?screen_name=monarchwadia). My twitter handle is [@monarchwadia](https://twitter.com/monarchwadia)
 3. Github: [Star MediEval on Github](https://github.com/monarchjhaveri/medieval)
 
-## NOTE! Restrictions
-Currently (mostly because of the fact that I'm the only developer working on this project), only Docker on Linux is supported. But this can change! [Let me know](https://github.com/monarchjhaveri/medieval#thankware) that you like MediEval! if enough people are using MediEval, I can absolutely add support for Windows and MacOS.
+## Restrictions
+Currently (mostly because of the fact that the project is quite new at this moment), only Docker on Linux is supported. But this can change! [Let me know](https://github.com/monarchjhaveri/medieval#thankware) that you like MediEval! if enough people are using MediEval, I can absolutely add support for Windows and MacOS.
 
 ## Installation
 0. Only supported on Linux. It might not work on Windows or MacOS. 
 1. Ensure that you [have Docker installed](https://www.docker.com/).
-2. Make sure that your user [can use Docker without sudo[(https://askubuntu.com/questions/477551/how-can-i-use-docker-without-sudo).
+2. Make sure that your user [can use Docker without sudo](https://askubuntu.com/questions/477551/how-can-i-use-docker-without-sudo).
 3. `npm install -g medieval`
 
 ## NPM Instructions
