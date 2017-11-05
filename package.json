@@ -4,6 +4,7 @@
   "bin": {
     "medieval": "bin/bin.js"
   },
+  "main": "main.js",
   "license": "MIT",
   "dependencies": {
     "caporal": "^0.8.0",

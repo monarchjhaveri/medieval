@@ -1,14 +1,14 @@
 var Docker = require('dockerode');
-var languages = require('../languages');
+var languages = require('./languages');
 
-var runners = {};
+var medieval = {};
 
 Object.keys(languages).forEach(function(name) {
   var definition = languages[name];
   var image = definition.image;
   var commandBase = definition.commandBase;
 
-  runners[name] = function(script) {
+  medieval[name] = function(script) {
     var docker = new Docker();
 
     return docker.pull(image)
@@ -34,4 +34,4 @@ Object.keys(languages).forEach(function(name) {
 })
 
 
-module.exports = runners;
+module.exports = medieval;
