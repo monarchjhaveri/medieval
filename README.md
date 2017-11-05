@@ -1,12 +1,12 @@
-# MediEvalJs
+# MediEval
 
-MediEvalJs is a library that lets you evaluate code in several language runtimes. MediEvalJs functionality is exposed in two convenient ways:
+MediEval is a library that lets you evaluate code in several language runtimes. MediEval functionality is exposed in two convenient ways:
 1. Command line executable, called 'medieval'
 2. Node.js APIs, using `require('medieval')`. 
 
-MediEvalJs can be used to create code evaluators like those used at CodeAcademy, TestDome and repl.it. 
+MediEval can be used to create code evaluators like those used at CodeAcademy, TestDome and repl.it. 
 
-MediEvalJs owes many thanks to Docker, on which it runs.
+MediEval owes many thanks to Docker, on which it runs.
 
 Runtimes currently supported:
 * node
@@ -14,17 +14,17 @@ Runtimes currently supported:
 * python
 
 ## Thankware
-MediEvalJs is thankware; which means I don't want any money for the effort I put into it... 
+MediEval is thankware; which means I don't want any money for the effort I put into it... 
 
 ...but I *LOVE* getting paid in thank-you's!
 
 Ways to thank me:
-1. Twitter: [Help spread the word](https://twitter.com/intent/tweet?text=Hey%20%40monarchwadia!%20I%20love%20using%20%23MediEvalJs!%20Thank%20you%20for%20the%20good%20work!%20https%3A%2F%2Fwww.npmjs.com%2Fmedieval%20%23javascript%20%40npmjs%20%40Docker) with #hashtags and @mentions! 
+1. Twitter: [Help spread the word](https://twitter.com/intent/tweet?text=Hey%20%40monarchwadia!%20I%20love%20using%20%23MediEval!%20Thank%20you%20for%20the%20good%20work!%20https%3A%2F%2Fwww.npmjs.com%2Fmedieval%20%23javascript%20%40npmjs%20%40Docker) with #hashtags and @mentions! 
 2. Twitter: [Follow me](https://twitter.com/intent/follow?screen_name=monarchwadia). My twitter handle is [@monarchwadia](https://twitter.com/monarchwadia)
-3. Github: [Star MediEvalJs on Github](https://github.com/monarchjhaveri/medieval)
+3. Github: [Star MediEval on Github](https://github.com/monarchjhaveri/medieval)
 
 ## NOTE! Restrictions
-Currently (mostly because of the fact that I'm the only developer working on this project), only Docker on Linux is supported. But this can change! [Let me know](https://github.com/monarchjhaveri/medieval#thankware) that you like MediEvalJs! if enough people are using MediEvalJs, I can absolutely add support for Windows and MacOS.
+Currently (mostly because of the fact that I'm the only developer working on this project), only Docker on Linux is supported. But this can change! [Let me know](https://github.com/monarchjhaveri/medieval#thankware) that you like MediEval! if enough people are using MediEval, I can absolutely add support for Windows and MacOS.
 
 ## Installation
 0. Only supported on Linux. It might not work on Windows or MacOS. 
