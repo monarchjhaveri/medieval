@@ -1,0 +1,11 @@
+{
+  "name": "medieval",
+  "version": "0.0.1",
+  "bin": {
+    "medieval": "bin/bin.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "vorpal": "^1.12.0"
+  }
+}
