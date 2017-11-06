@@ -18,6 +18,9 @@ Object.keys(medieval).forEach(function(runtime) {
         .then(function(data) {
           var statusCode = data.output.StatusCode;
           process.exit(statusCode);
+        })
+        .catch(function(err) {
+          console.log("ERROR WHILE RUNNING medieval " + runtime + "!", err);
         });
     });
 });
