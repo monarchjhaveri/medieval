@@ -9,5 +9,14 @@
   "dependencies": {
     "caporal": "^0.8.0",
     "dockerode": "^2.5.3"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "sinon": "^4.1.1"
+  },
+  "scripts": {
+    "start": "mocha",
+    "debug": "mocha debug"
   }
 }

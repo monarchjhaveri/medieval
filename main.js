@@ -13,7 +13,9 @@ Object.keys(languages).forEach(function(name) {
   var image = definition.image;
   var commandBase = definition.commandBase;
 
-  medieval[name] = function(script) {
+  // Main definition of the runner function here
+  medieval[name] = function(script, options) {
+    var options = parseOptions(options);
     var docker = new Docker();
 
     return docker.pull(image)
@@ -28,12 +30,20 @@ Object.keys(languages).forEach(function(name) {
       })
       .then(function() {
         // run the snippet
-        return docker.run(image, commandBase.concat(script), [process.stdout, process.stderr], {
+        return docker.run(image, commandBase.concat(script), [options.stdout, options.stderr], {
           tty: false // split stdout and stderr
         });
       });
   }
 })
 
+function parseOptions(options) {
+  var defaultOptions = {
+    stdout: process.stdout,
+    stderr: process.stderr
+  }
+
+  return Object.assign(defaultOptions, options);
+}
 
 module.exports = medieval;
