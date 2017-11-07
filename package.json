@@ -7,8 +7,10 @@
   "main": "main.js",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "caporal": "^0.8.0",
-    "dockerode": "^2.5.3"
+    "dockerode": "^2.5.3",
+    "express": "^4.16.2"
   },
   "devDependencies": {
     "chai": "^4.1.2",
@@ -16,7 +18,7 @@
     "sinon": "^4.1.1"
   },
   "scripts": {
-    "start": "mocha",
-    "debug": "mocha debug"
+    "start": "mocha -t 10000 -w",
+    "debug": "mocha -t 10000 -w debug"
   }
 }

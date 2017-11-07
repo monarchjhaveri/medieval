@@ -3,6 +3,7 @@
 var prog = require('caporal');
 var medieval = require('../main');
 var version = require('../package.json').version;
+var server = require('./server');
 
 var builder = prog.version(version);
 
@@ -15,15 +16,30 @@ Object.keys(medieval).forEach(function(runtime) {
       var runner = medieval[runtime]
 
       runner(script)
-        .then(function(data) {
-          var statusCode = data.output.StatusCode;
+        .then(function({stdout, stderr, statusCode}) {
+          if (stdout) {
+            console.log(stdout);
+          }
+
+          if (stderr) {
+            console.error(stderr);
+          }
+
           process.exit(statusCode);
         })
         .catch(function(err) {
-          console.log("ERROR WHILE RUNNING medieval " + runtime + "!", err);
+          console.log("ERROR WHILE RUNNING COMMAND [medieval " + runtime + "]", err);
         });
     });
 });
+
+builder
+  .command('serve', 'Runs the evaluator in server mode')
+  .option('--port [port]', 'Port to run server on', prog.INT, 1337)
+  .action(function(args, options, logger) {
+    server.serve(options.port)
+      .then(receivedPort => console.log(`MediEval server listening on port ${receivedPort}`));
+  })
 
 
 

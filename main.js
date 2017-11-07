@@ -1,5 +1,6 @@
 var Docker = require('dockerode');
 var languages = require('./languages');
+var Writable = require('stream').Writable;
 
 var medieval = {};
 
@@ -14,9 +15,18 @@ Object.keys(languages).forEach(function(name) {
   var commandBase = definition.commandBase;
 
   // Main definition of the runner function here
-  medieval[name] = function(script, options) {
-    var options = parseOptions(options);
+  medieval[name] = function(script) {
     var docker = new Docker();
+
+    let stdout = '';
+    var stdoutStream = new Writable({
+      write: (dataBuffer) => stdout += dataBuffer.toString('utf-8')
+    });
+
+    let stderr = '';
+    var stderrStream = new Writable({
+      write: (dataBuffer) => stderr += dataBuffer.toString('utf-8')
+    });
 
     return docker.pull(image)
       .then(function(stream) {
@@ -30,20 +40,17 @@ Object.keys(languages).forEach(function(name) {
       })
       .then(function() {
         // run the snippet
-        return docker.run(image, commandBase.concat(script), [options.stdout, options.stderr], {
-          tty: false // split stdout and stderr
-        });
-      });
+        return docker.run(image, commandBase.concat(script), [stdoutStream, stderrStream], {
+          tty: false // split stdoutStream and stderrStream
+        })
+        .then(function(data) {
+          const statusCode = data.output.StatusCode;
+          debugger;
+          return Promise.resolve({stdout, stderr, statusCode})
+        })
+      })
+;
   }
 })
-
-function parseOptions(options) {
-  var defaultOptions = {
-    stdout: process.stdout,
-    stderr: process.stderr
-  }
-
-  return Object.assign(defaultOptions, options);
-}
 
 module.exports = medieval;

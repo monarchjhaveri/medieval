@@ -34,14 +34,30 @@ Currently (mostly because of the fact that the project is quite new at this mome
 
 ## NPM Instructions
 
+MediEval relies on Promises to return the results of your evaluation. 
+
+Note that `.catch` is only used to catch unexpected errors on the library level and below. Should the evaluation fail (for example, because of an exception being thrown by the code being evaluated), then that will be considered a success, and the response will return with stdout, stderr and statusCode inside the `then` function.
+
+The response comes in the following format:
+
+```
+// Example output
+{
+    "stdout": "Hello World\n",
+    "stderr": "",
+    "statusCode": 0
+}
+```
+
+
 ```
 const medieval = require('medieval');
 
 // Node.js
 let nodeScript = 'console.log("Hello World");'
 medieval.node(nodeScript)
-  .then(result => {
-    console.log(result);  
+  .then({stdout, stderr, statusCode} => {
+    console.log({stdout, stderr, statusCode});  
   })
   .catch(err => {
     console.log(err);
@@ -50,8 +66,8 @@ medieval.node(nodeScript)
 // Python
 let pythonScript = 'print("Hello World")'
   medieval.python(pythonScript)
-    .then(result => {
-      console.log(result);  
+    .then({stdout, stderr, statusCode} => {
+      console.log({stdout, stderr, statusCode});  
     })
     .catch(err => {
       console.log(err);
@@ -74,6 +90,7 @@ let pythonScript = 'print("Hello World")'
      node <script>        Evaluates node code                
      ruby <script>        Evaluates ruby code                
      python <script>      Evaluates python code              
+     serve                Runs the evaluator in server mode  
      help <command>       Display help for a specific command
 
    GLOBAL OPTIONS
@@ -97,3 +114,53 @@ medieval ruby "puts 'Hello ' + 'World'"
 > Hello World
 ```
 
+## Server Mode
+
+MediEval is capable of running a standalone Express server.
+
+```
+medieval serve
+> MediEval server listening on port 1337
+```
+
+You can specify a custom port by passing in the --port option
+
+```
+medieval serve --port 3000
+> MediEval server listening on port 3000
+```
+
+There is only one endpoint, `POST /`, which has the following API contract:
+
+```
+VERB:    POST
+
+PATH:    /
+
+PAYLOAD:
+  code: The code to evaluate. Required.
+  runtime: The runtime to invoke (ruby, node, python...). Required.
+
+RESPONSE:
+  stdout: The stdout output of the invocation
+  stderr: The stderr output of the invocation
+  statusCode: The status code of the process exit
+```
+
+Here is an example of a payload and a response.
+
+```
+EXAMPLE PAYLOAD : 
+{
+  "code": "console.log('Hello World')",
+  "runtime": "node"
+}
+
+ExAMPLE RESPONSE:
+{
+    "stdout": "Hello World\n",
+    "stderr": "",
+    "statusCode": 0
+}
+
+```

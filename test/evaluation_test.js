@@ -1,5 +1,3 @@
-var Writable = require('stream').Writable;
-
 var medieval = require('../main.js');
 var languages = require('../languages');
 var expect = require('chai').expect;
@@ -17,30 +15,24 @@ describe('Evaluation', function() {
     const __ERROR_STATEMENT__ = errorStatement;
 
     describe(__LANGUAGE__, function() {
-      it('should accept stdout as an option', function(done) {
-        let output = '';
-
-        var stdout = new Writable({
-          write: (dataBuffer) => output += dataBuffer.toString('utf-8')
-        });
-
-        medieval[__LANGUAGE__](__STATEMENT__, {stdout: stdout})
-        .then(() => {
-          expect(output).to.equal('Hello World\n');
+      it('should return stdout and statusCode of 0 on success', function(done) {
+        medieval[__LANGUAGE__](__STATEMENT__)
+        .then(({stdout, stderr, statusCode}) => {
+          // debugger;
+          expect(stdout).to.equal('Hello World\n');
+          expect(stderr).to.equal('');
+          expect(statusCode).to.equal(0);
+          expect()
           done();
         })
       })
 
-      it('should accept stderr as an option', function(done) {
-        let output = '';
-
-        var stderr = new Writable({
-          write: (dataBuffer) => output += dataBuffer.toString('utf-8')
-        });
-
-        medieval[__LANGUAGE__](__ERROR_STATEMENT__, {stderr: stderr})
-        .then(() => {
-          expect(output).to.not.be.empty;
+      it('should return stderr and non-0 statusCode on error', function(done) {
+        medieval[__LANGUAGE__](__ERROR_STATEMENT__)
+        .then(({stdout, stderr, statusCode}) => {
+          expect(stderr.length).to.not.equal(0);
+          expect(stdout).to.equal('');
+          expect(statusCode).to.not.equal(0);
           done();
         })
       })
